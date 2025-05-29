@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Loja Futebol Pro - Equipamentos de Futebol</title>
+<style>
+  /* Reset e base */
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #fafafa;
+    color: #222;
+    line-height: 1.6;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  /* Navbar fixa */
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: #002383;
+    padding: 15px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    z-index: 1000;
+  }
+
+  header .logo {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: #e0e0e0;
+    letter-spacing: 2px;
+  }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+  }
+
+  nav ul li a {
+    color: #e0e0e0;
+    font-weight: 600;
+    transition: color 0.3s ease;
+  }
+
+  nav ul li a:hover,
+  nav ul li a:focus {
+    color: #6893d4;
+  }
+
+  /* Espaço após navbar fixa */
+  main {
+    padding-top: 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  /* Hero Section */
+  .hero {
+    background: linear-gradient(rgba(0, 57, 143, 0.65), rgba(8, 44, 143, 0.65)),
+                url('https://images.unsplash.com/photo-1509027571066-4d3ea665b68d?auto=format&fit=crop&w=1400&q=80') no-repeat center center/cover;
+    height: 500px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #f0f0f0;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+    margin-bottom: 50px;
+  }
+
+  .hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    font-weight: 900;
+    letter-spacing: 4px;
+  }
+
+  .hero p {
+    font-size: 1.4rem;
+    max-width: 700px;
+    margin-bottom: 30px;
+    font-weight: 500;
+    letter-spacing: 1.2px;
+  }
+
+  .btn-primary {
+    background-color: #6873d4;
+    color: #00154d;
+    font-weight: 700;
+    border: none;
+    padding: 15px 45px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    box-shadow: 0 6px 15px rgba(38, 88, 196, 0.87);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .btn-primary:hover,
+  .btn-primary:focus {
+    background-color: #4a70c3;
+    box-shadow: 0 8px 25px rgba(74, 92, 195, 0.6);
+    outline: none;
+  }
+
+  /* Produtos */
+  .products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+    gap: 35px;
+  }
+
+  .product-card {
+    background: #fff;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 12px 20px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .product-card:hover,
+  .product-card:focus-within {
+    transform: translateY(-8px);
+    box-shadow: 0 18px 30px rgba(0,0,0,0.15);
+  }
+
+  .product-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .product-card:hover img,
+  .product-card:focus-within img {
+    transform: scale(1.05);
+  }
+
+  .product-info {
+    padding: 25px 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .product-info h3 {
+    color: #00154d;
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+  }
+
+  .product-info p {
+    flex-grow: 1;
+    color: #555;
+    font-size: 1rem;
+    margin-bottom: 20px;
+  }
+
+  .product-info button {
+    background-color: #001b4d;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    align-self: flex-start;
+    box-shadow: 0 6px 15px rgba(0, 8, 77, 0.35);
+  }
+
+  .product-info button:hover,
+  .product-info button:focus {
+    background-color: #001a6e;
+    outline: none;
+  }
+
+  /* Footer */
+  footer {
+    background-color: #0029af;
+    color: #c8c8c8;
+    text-align: center;
+    padding: 25px 20px;
+    margin-top: 60px;
+  }
+
+  footer p {
+    margin-bottom: 12px;
+  }
+
+  .social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+  }
+
+  .social-icons a svg {
+    fill: #3d5fd1;
+    width: 28px;
+    height: 28px;
+    transition: fill 0.3s ease;
+  }
+
+  .social-icons a:hover svg,
+  .social-icons a:focus svg {
+    fill: #3d5fd1;
+    outline: none;
+  }
+
+  /* Responsividade */
+  @media (max-width: 768px) {
+    .hero h1 {
+      font-size: 2.5rem;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      max-width: 90%;
+    }
+  }
+
+  @media (max-width: 480px) {
+    header {
+      padding: 12px 20px;
+    }
+
+    nav ul {
+      gap: 20px;
+    }
+
+    .product-card img {
+      height: 180px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo" aria-label="Logo Loja Futebol Pro">Futebol Pro</div>
+  <nav>
+    <ul>
+      <li><a href="#produtos" tabindex="0">Produtos</a></li>
+      <li><a href="#sobre" tabindex="0">Sobre</a></li>
+      <li><a href="#contato" tabindex="0">Contato</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section class="hero" role="banner" aria-label="Apresentação da loja de futebol">
+    <h1>Equipamentos de Futebol para quem joga pra ganhar</h1>
+    <p>Chuteiras, bolas, camisas oficiais e muito mais com qualidade e preço justo.</p>
+    <button class="btn-primary" onclick="window.location.href='#produtos'">Confira nossos produtos</button>
+  </section>
+
+  <section id="produtos" class="products" aria-label="Produtos em destaque">
+    <article class="product-card" tabindex="0" aria-labelledby="prod1-title" aria-describedby="prod1-desc">
+      <img src="https://images.unsplash.com/photo-1521412644187-c49fa049e84d?auto=format&fit=crop&w=400&q=80" alt="Chuteira Nike Mercurial" />
+      <div class="product-info">
+        <h3 id="prod1-title">Chuteira Nike Mercurial</h3>
+        <p id="prod1-desc">Alta performance e leveza para driblar seus adversários com facilidade.</p>
+        <button onclick="alert('Produto Chuteira Nike Mercurial adicionado ao carrinho!')">Comprar</button>
+      </div>
+    </article>
+
+    <article class="product-card" tabindex="0" aria-labelledby="prod2-title" aria-describedby="prod2-desc">
+      <img src="https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=400&q=80" alt="Bola de Futebol Adidas" />
+      <div class="product-info">
+        <h3 id="prod2-title">Bola de Futebol Adidas</h3>
+        <p id="prod2-desc">Resistente e perfeita para jogos em gramado natural e sintético.</p>
+        <button onclick="alert('Produto Bola de Futebol Adidas adicionado ao carrinho!')">Comprar</button>
+      </div>
+    </article>
+
+    <article class="product-card" tabindex="0" aria-labelledby="prod3-title" aria-describedby="prod3-desc">
+      <img src="https://images.unsplash.com/photo-1541233349642-6e425fe6190e?auto=format&fit=crop&w=400&q=80" alt="Camiseta Oficial do Time" />
+      <div class="product-info">
+        <h3 id="prod3-title">Camiseta Oficial</h3>
+        <p id="prod3-desc">Mostre sua paixão pelo seu time com estilo e conforto durante os jogos.</p>
+        <button onclick="alert('Produto Camiseta Oficial adicionado ao carrinho!')">Comprar</button>
+      </div>
+    </article>
+
+    <article class="product-card" tabindex="0" aria-labelledby="prod4-title" aria-describedby="prod4-desc">
+      <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=400&q=80" alt="Meias Esportivas" />
+      <div class="product-info">
+        <h3 id="prod4-title">Meias Esportivas</h3>
+        <p id="prod4-desc">Suporte e conforto para seus pés durante a partida.</p>
+        <button onclick="alert('Produto Meias Esportivas adicionado ao carrinho!')">Comprar</button>
+      </div>
+    </article>
+  </section>
+
+  <section id="sobre" style="margin-top: 60px; text-align: center;">
+    <h2 style="color:#00124d; font-weight: 700; font-size: 2rem; margin-bottom: 15px;">Sobre a Futebol Pro</h2>
+    <p style="max-width: 700px; margin: 0 auto; font-size: 1.1rem; color:#444;">
+      Somos uma loja especializada em artigos esportivos para futebol, comprometida com a qualidade, inovação e satisfação dos nossos clientes. Oferecemos os melhores produtos para você se destacar dentro de campo.
+    </p>
+  </section>
+
+  <section id="contato" style="margin-top: 60px; text-align: center;">
+    <h2 style="color:#00124d; font-weight: 700; font-size: 2rem; margin-bottom: 15px;">Fale Conosco</h2>
+    <p style="font-size: 1.1rem; color:#444; margin-bottom: 10px;">
+      Email: contato@futebolpro.com.br
+    </p>
+    <p style="font-size: 1.1rem; color:#444;">
+      Telefone: (11) 99999-9999
+    </p>
+  </section>
+</main>
+
+<footer>
+  <p>© 2025 Loja Futebol Pro - Todos os direitos reservados</p>
+  <div class="social-icons" role="navigation" aria-label="Redes sociais">
+    <a href="#" aria-label="Facebook" tabindex="0" target="_blank" rel="noopener noreferrer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22.675 0h-21.35C.6 0 0 .6 0 1.338v21.324C0 23.4.6 24 1.325 24h11.494v-9.294H9.691v-3.622h3.128V8.413c0-3.1 1.894-4.788 4.659-4.788 1.325 0 2.466.099 2.797.143v3.24l-1.918.001c-1.504 0-1.796.716-1.796 1.766v2.318h3.59l-.467 3.622h-3.123V24h6.116C23.4 24 24 23.4 24 22.662V1.338C24 .6 23.4 0 22.675 0z"/></svg>
+    </a>
+    <a href="#" aria-label="Instagram" tabindex="0" target="_blank" rel="noopener noreferrer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.849.07 1.366.062 2.633.349 3.608 1.324.975.975 1.262 2.242 1.324 3.608.058 1.265.069 1.645.069 4.849 0 3.204-.012 3.584-.07 4.849-.062 1.366-.349 2.633-1.324 3.608-.975.975-2.242 1.262-3.608 1.324-1.265.058-1.645.069-4.849.069-3.204 0-3.584-.012-4.849-.07-1.366-.062-2.633-.349-3.608-1.324-.975-.975-1.262-2.242-1.324-3.608C2.175 15.584 2.163 15.204 2.163 12c0-3.204.012-3.584.07-4.849.062-1.366.349-2.633 1.324-3.608C4.532 2.512 5.799 2.225 7.165 2.163 8.43 2.105 8.81 2.094 12 2.094m0-2.163C8.741 0 8.332.013 7.052.072 5.773.132 4.548.423 3.466 1.505 2.383 2.588 2.093 3.813 2.033 5.092 1.974 6.373 1.962 6.782 1.962 10.041s.013 3.668.072 4.949c.06 1.279.35 2.504 1.433 3.587 1.082 1.082 2.307 1.373 3.587 1.433 1.28.06 1.689.072 4.948.072s3.668-.013 4.949-.072c1.279-.06 2.504-.35 3.587-1.433 1.082-1.083 1.373-2.308 1.433-3.587.06-1.28.072-1.689.072-4.949s-.013-3.668-.072-4.949c-.06-1.279-.35-2.504-1.433-3.587C19.5.423 18.274.132 16.995.072 15.715.013 15.305 0 12.045 0z"/></svg>
+    </a>
+    <a href="#" aria-label="Twitter" tabindex="0" target="_blank" rel="noopener noreferrer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23.954 4.569c-.885.39-1.83.654-2.825.775 1.014-.609 1.794-1.574 2.163-2.724-.949.564-2.005.974-3.127 1.195-.897-.956-2.178-1.555-3.594-1.555-2.723 0-4.928 2.206-4.928 4.928 0 .39.045.765.13 1.124-4.094-.205-7
